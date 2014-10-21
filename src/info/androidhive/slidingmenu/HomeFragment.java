@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
 		transaction.replace(R.id.frame_container, fragment);
 		transaction.addToBackStack(null);
 
-		// Commit the transaction
+		// Commit the transactionddd
 		transaction.commit();
 	}
 	public  void getcode(){
