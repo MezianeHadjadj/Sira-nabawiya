@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -71,7 +72,7 @@ public class HomeFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 							System.out.println("zzzzzzzzzzzzzzzz");
-							start();
+							start(position);
 
 			}
 
@@ -81,17 +82,23 @@ public class HomeFragment extends Fragment {
 
         return rootView;
     }
-	public void start(){
+	public void start(int position){
 		Fragment fragment = null;
 		
 		fragment = new FindPeopleFragment();
 		FragmentManager fragmentManager = getFragmentManager();
 		//fragmentManager.beginTransaction().replace(R.id.frame_container, fragment);
 		android.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-
+		//pass params to fragment
+		 Bundle bundle = new Bundle();
+	        bundle.putInt("position", position);
+	        //FragmentClass fragInfo = new FragmentClass();
+	        fragment.setArguments(bundle);
+	        
 		transaction.replace(R.id.frame_container, fragment);
 		transaction.addToBackStack(null);
-
+		//fragment.getActivity().getelement(5);
+		
 		// Commit the transactionddd
 		transaction.commit();
 	}
