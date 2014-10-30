@@ -52,7 +52,7 @@ public class LazyAdapter extends BaseAdapter {
         song = data.get(position);
         
         // Setting all values in listview
-        title.setText("ll");
+        title.setText(song.get(HomeFragment.KEY_TITLE));
         artist.setText("kk");
         duration.setText("jje");
         

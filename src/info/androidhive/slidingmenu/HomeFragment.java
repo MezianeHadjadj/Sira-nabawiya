@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +32,8 @@ public class HomeFragment extends Fragment {
 	static final String KEY_ARTIST = "artist";
 	static final String KEY_DURATION = "duration";
 	static final String KEY_THUMB_URL = "thumb_url";
-	
+	static final String KK = "titre";
+	JSONArray arrayObj=null;
 	ListView list;
     LazyAdapter adapter;
 	public HomeFragment(){}
@@ -43,21 +46,27 @@ public class HomeFragment extends Fragment {
         //getcode();
         //adapt listview
         ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
-		for (int i = 0; i <4  ; i++) {
+        JSONArray array_ojbect=Get_Json_Objects();
+        System.out.println(array_ojbect.size());
+        Log.e("lll","llllllllll");
+		for (int i = 0; i <array_ojbect.size() ; i++) {
+			JSONObject obj =(JSONObject) array_ojbect.get(i);
+	         Object url=obj.get("url");
+	         Object title=obj.get("titre");
 			// creating new HashMap
-			HashMap<String, String> map = new HashMap<String, String>();
-				
+			HashMap<String, String> map = new HashMap<String, String>();	
 			// adding each child node to HashMap key => value
 			map.put(KEY_ID, KEY_ID);
-			map.put(KEY_TITLE, KEY_TITLE);
-			map.put(KEY_ARTIST, KEY_ARTIST);
+			map.put(KEY_TITLE, title.toString());
+			map.put(KEY_ARTIST, "lll");
 			map.put(KEY_DURATION, KEY_DURATION);
-			map.put(KEY_THUMB_URL,KEY_THUMB_URL);
+			map.put(KEY_THUMB_URL,url.toString());
 
 			// adding HashList to ArrayList
 			songsList.add(map);
 		}
 		
+		Log.e("dddddd","dddddddddddd");
 		//View V = inflater.inflate(R.layout.fragment_home, container, false);
 		list=(ListView)rootView.findViewById(R.id.list);
 		// Getting adapter by passing xml data ArrayList
@@ -102,7 +111,7 @@ public class HomeFragment extends Fragment {
 		// Commit the transactionddd
 		transaction.commit();
 	}
-	public  void getcode(){
+	public  JSONArray Get_Json_Objects(){
 		JSONParser parser = new JSONParser();
         try {
         	
@@ -120,11 +129,15 @@ public class HomeFragment extends Fragment {
            String text=byteArrayOutputStream.toString();
            String data="["+text+"]";
            Object object=null;
-           JSONArray arrayObj=null;
+           
            JSONParser jsonParser=new JSONParser();
            object=jsonParser.parse(data);
            arrayObj=(JSONArray) object;
-           System.out.println("Json object :: "+arrayObj.get(1));
+           //JSONObject obj =(JSONObject) arrayObj.get(1);
+           //Object d=obj.get("url");
+           
+           //String d=node.getString(KK);
+           //System.out.println("Json object :: "+d);
            
            //JSONObject jsonObj = new JSONObject(text);
            //System.out.println(jsonObj.len);
@@ -132,6 +145,7 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
          
         }
+        return arrayObj;
 	}
 
 	
