@@ -37,14 +37,13 @@ public class LazyAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
             vi = inflater.inflate(R.layout.list_row, null);
 
         TextView title = (TextView)vi.findViewById(R.id.title); // title
-        TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
+        TextView time = (TextView)vi.findViewById(R.id.time); // artist name
         TextView duration = (TextView)vi.findViewById(R.id.duration); // duration
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
         
@@ -53,7 +52,7 @@ public class LazyAdapter extends BaseAdapter {
         
         // Setting all values in listview
         title.setText(song.get(HomeFragment.KEY_TITLE));
-        artist.setText("Time");
+        time.setText("Time");
         duration.setText("");
         
         return vi;
