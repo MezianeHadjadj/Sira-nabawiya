@@ -19,7 +19,7 @@
 			android:id="@+id/list_image"   
 	        android:layout_width="50dip"
 	        android:layout_height="50dip"
-	        android:src="@drawable/rihanna"/>
+	        android:src="@drawable/allah"/>
         
 	</LinearLayout>
     
@@ -42,7 +42,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:textColor="#343434"
+        android:textColor="#10bcc9"
         android:textSize="10dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
