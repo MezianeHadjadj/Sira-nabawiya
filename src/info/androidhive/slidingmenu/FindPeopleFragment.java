@@ -35,6 +35,7 @@ public class FindPeopleFragment extends Fragment implements OnClickListener {
 		
         return rootView;
     }
+	//ddd
 	public int getelement(int i){
 		System.out.println(i);
 		return 5;
