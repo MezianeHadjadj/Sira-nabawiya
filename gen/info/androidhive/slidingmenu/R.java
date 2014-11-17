@@ -91,9 +91,10 @@ public final class R {
         public static final int list_selector_my_list=0x7f020032;
         public static final int no_image=0x7f020033;
         public static final int play=0x7f020034;
-        public static final int seek_handler=0x7f020035;
-        public static final int seekbar_progress=0x7f020036;
-        public static final int seekbar_progress_bg=0x7f020037;
+        public static final int quran=0x7f020035;
+        public static final int seek_handler=0x7f020036;
+        public static final int seekbar_progress=0x7f020037;
+        public static final int seekbar_progress_bg=0x7f020038;
     }
     public static final class id {
         public static final int action_settings=0x7f0b001c;

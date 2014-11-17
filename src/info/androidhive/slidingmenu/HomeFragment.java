@@ -26,16 +26,12 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class HomeFragment extends Fragment {
-	static final String KEY_SONG = "song"; // parent node
-	static final String KEY_ID = "id";
-	static final String KEY_TITLE = "title";
-	static final String KEY_ARTIST = "artist";
-	static final String KEY_DURATION = "duration";
-	static final String KEY_THUMB_URL = "thumb_url";
+	
 	static final String KK = "titre";
 	JSONArray arrayObj=null;
 	ListView list;
     LazyAdapter adapter;
+     
 	public HomeFragment(){}
 	
 	@Override
@@ -50,17 +46,18 @@ public class HomeFragment extends Fragment {
         System.out.println(array_ojbect.size());
         Log.e("lll","llllllllll");
 		for (int i = 0; i <array_ojbect.size() ; i++) {
+			
 			JSONObject obj =(JSONObject) array_ojbect.get(i);
 	         Object url=obj.get("url");
 	         Object title=obj.get("titre");
 			// creating new HashMap
 			HashMap<String, String> map = new HashMap<String, String>();	
 			// adding each child node to HashMap key => value
-			map.put(KEY_ID, KEY_ID);
-			map.put(KEY_TITLE, title.toString());
-			map.put(KEY_ARTIST, "lll");
-			map.put(KEY_DURATION, KEY_DURATION);
-			map.put(KEY_THUMB_URL,url.toString());
+			map.put(Model.KEY_ID, Model.KEY_ID);
+			map.put(Model.KEY_TITLE, title.toString());
+			map.put(Model.KEY_ARTIST, "lll");
+			map.put(Model.KEY_DURATION, Model.KEY_DURATION);
+			map.put(Model.KEY_THUMB_URL,url.toString());
 
 			// adding HashList to ArrayList
 			songsList.add(map);
@@ -111,6 +108,7 @@ public class HomeFragment extends Fragment {
 		// Commit the transactionddd
 		transaction.commit();
 	}
+	
 	public  JSONArray Get_Json_Objects(){
 		JSONParser parser = new JSONParser();
         try {
