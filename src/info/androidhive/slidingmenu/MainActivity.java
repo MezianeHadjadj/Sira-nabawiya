@@ -38,13 +38,13 @@ public class MainActivity extends Activity {
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
-
+	DBAdapter dba= new DBAdapter(this);
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -162,17 +162,20 @@ public class MainActivity extends Activity {
 	 * Diplaying fragment view for selected nav drawer list item
 	 * */
 	private void displayView(int position) {
-		// update the main content by replacing fragments
+		// update the main content by rdeplacing fragments
 		Fragment fragment = null;
+		
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
 			break;
 		case 1:
 			fragment = new FindPeopleFragment();
+			System.out.println("find");
 			break;
 		case 2:
 			fragment = new PhotosFragment();
+			System.out.println("photo");
 			break;
 		case 3:
 			fragment = new CommunityFragment();

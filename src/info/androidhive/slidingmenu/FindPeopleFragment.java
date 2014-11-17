@@ -2,12 +2,17 @@ package info.androidhive.slidingmenu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 public class FindPeopleFragment extends Fragment implements OnClickListener {
+
 	private ImageButton btnPlay;
 	private ImageButton btnForward;
 	private ImageButton btnBackward;
@@ -35,44 +41,87 @@ public class FindPeopleFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_find_people, container, false);
-        
+		DBAdapter db= new DBAdapter(this.getActivity());
 		btnPlay = ((ImageButton)rootView.findViewById(R.id.btnPlay));
 		btnPlay.setOnClickListener(this);
 		btnForward = ((ImageButton)rootView.findViewById(R.id.btnForward));
 		btnForward.setOnClickListener(this);
 		btnBackward = ((ImageButton)rootView.findViewById(R.id.btnBackward));
 		btnBackward.setOnClickListener(this);
+		if (this.getArguments() != null){
 		 i = this.getArguments().getInt("position");
-		Play(i);
-		System.out.println(i);
-		System.out.println("iiiiiiiiiiiiiiiiiz");
+		 
+		 db.open();
+		 try{
+			 //ddd
+			 Cursor c=db.getAllContacts();
+			 System.out.println("beg"+c.getCount());
+			 if (c.getCount()<10){
+				 long d=db.insertContact(""+i);
+				 db.close();
+				 System.out.println("eeeee:"+d);
+			 }else{
+				 
+				 if (c.moveToFirst()){
+					 System.out.println(c.getString(1));
+					 int j=Integer.parseInt(c.getString(0));
+					 db.open();
+					 boolean boo=db.deleteContact(j);
+					db.close();
+					 System.out.println("booooo:"+boo);
+				 }
+				 db.open();
+				 long d=db.insertContact(""+i);
+				 db.close();
+				 Cursor cc=db.getAllContacts();
+				 System.out.println("end"+cc.getCount());
+				 
+			 }
+		 }catch(Exception e){
+			 
+		 }
+		 //long d=db.insertContact(""+i);
+		 //Cursor c=db.getAllContacts();	
+		 
+		 //long lng=dba.insertContact("hh");
+			//System.out.println(d);
+			System.out.println("lngggg");
+			//dba.close();
+		 
+		}else{
+			//here i load the last
+			i=0;
+		}
 		
+		//dba.open();
+		//Cursor c=db.getAllContacts();
+		
+		
+		System.out.println("finn");
+		
+		Play(i);
         return rootView;
     }
 	
 	public int getelement(int i){
-		System.out.println(i);
+		
 		return 5;
 	}
 
 	public void Play(int index) {
-		System.out.println(index);
-		System.out.println("indexxx");
+		
 		 try {
 		    player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		    JSONArray array_ojbect=Get_Json_Objects();
 		    JSONObject obj =(JSONObject) array_ojbect.get(index);
 		    Object url=obj.get("url");
 	         Object title=obj.get("titre");
-	         System.out.println(url);
-	         System.out.println("urrrrrrrrrrrrr");
 	         player.reset();
 		    player.setDataSource(url.toString()
 		            );
 		    player.prepare();
 		    
 		    if(player.isPlaying()){
-		    	System.out.println("isplayingg");
 				if(player!=null){
 					player.pause();
 					// Changing button image to play button
@@ -80,7 +129,6 @@ public class FindPeopleFragment extends Fragment implements OnClickListener {
 				}
 			}else{
 				// Resume song
-				System.out.println("not playing");
 				if(player!=null){
 					Log.e("stat","not null");
 					player.start();
@@ -121,8 +169,6 @@ public class FindPeopleFragment extends Fragment implements OnClickListener {
 			    JSONObject obj =(JSONObject) array_ojbect.get(index);
 			    Object url=obj.get("url");
 		         Object title=obj.get("titre");
-		         System.out.println(url);
-		         System.out.println("urrrrrrrrrrrrr");
 		         player.reset();
 			    player.setDataSource(url.toString()
 			            );
@@ -163,12 +209,7 @@ public class FindPeopleFragment extends Fragment implements OnClickListener {
 		}
 	  }else{
 		  if(ele==R.id.btnForward){
-			  System.out.println("forwarddddd");
-			  System.out.println(i);
 			  if(i!=-1){
-				  System.out.println("forwarddddd");
-				  //onDestroy();
-				  
 				  i=i+1;
 			  forward(i);
 			  }

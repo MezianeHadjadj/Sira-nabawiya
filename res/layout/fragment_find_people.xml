@@ -68,13 +68,14 @@
             android:background="@layout/rounded_corner"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
-            <!-- Previous Button -->
+            <!-- Previous Button 
             <ImageButton
                 android:id="@+id/btnPrevious" 
                 android:src="@drawable/btn_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"/>
+                -->
             <!-- Backward Button -->
             <ImageButton 
                 android:id="@+id/btnBackward"
@@ -96,13 +97,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"/>
-            <!-- Next Button -->
+            <!-- Next Button 
             <ImageButton 
                 android:id="@+id/btnNext"
                 android:src="@drawable/btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"/>
+                -->
         </LinearLayout>
     </LinearLayout>
     
