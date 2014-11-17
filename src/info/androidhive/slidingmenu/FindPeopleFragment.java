@@ -135,6 +135,7 @@ public class FindPeopleFragment extends Fragment implements OnClickListener {
 				System.out.println("messassge"+e.getMessage());
 			}
 	}
+	
 	@Override
 	 public void onDestroy(){
 	 super.onDestroy();
@@ -176,9 +177,10 @@ public class FindPeopleFragment extends Fragment implements OnClickListener {
 			  if(ele==R.id.btnBackward){
 				  if(i!=-1){
 					  if(i==0){
-						  Play(i);
+						  forward(i);
 					  }else{
-						  Play(i-1);  
+						  i=i-1;
+						  forward(i);  
 					  }
 				  
 				  }
